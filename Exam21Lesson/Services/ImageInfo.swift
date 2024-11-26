@@ -10,4 +10,5 @@ import Foundation
 struct ImageInfo {
     
     let imageName: String
+    let imageText: String
 }
