@@ -58,8 +58,6 @@ private extension ButtonView {
             layer.shadowOffset = CGSize(width: 0, height: 2)
             layer.shadowOpacity = 0.3
             layer.shadowRadius = 4
-        } else {
-            layer.shadowOpacity = 0
         }
     }
 }

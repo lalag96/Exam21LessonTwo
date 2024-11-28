@@ -34,7 +34,7 @@ class ViewController: UIViewController {
         shadow: false
     )
     
-    private let stackView = UIStackView()
+    private let verticalstackView = UIStackView()
     private let horizontalStackView = UIStackView()
 
     override func viewDidLoad() {
@@ -51,15 +51,42 @@ class ViewController: UIViewController {
 
 private extension ViewController {
     
+    func addAction() {
+        let nextdButtonAction = UIAction { _ in
+            let nextImageInfo = self.imageDataManagement.getNextImageIndex()
+            self.imageView.image = UIImage(named: nextImageInfo.imageName)
+            self.infoLabel.text = nextImageInfo.imageText
+        }
+        
+        let firstButtonAction = UIAction { _ in
+            let firstImageInfo = self.imageDataManagement.getFirstButtonIndex()
+            self.imageView.image = UIImage(named: firstImageInfo.imageName)
+            self.infoLabel.text = firstImageInfo.imageText
+        }
+        
+        let lastButtonAction = UIAction { _ in
+            let lastImageInfo = self.imageDataManagement.getLastImageIndex()
+            self.imageView.image = UIImage(named: lastImageInfo.imageName)
+            self.infoLabel.text = lastImageInfo.imageText
+        }
+        
+        nextdButton.addAction(nextdButtonAction, for: .touchUpInside)
+        lastButton.addAction(lastButtonAction, for: .touchUpInside)
+        firstButton.addAction(firstButtonAction, for: .touchUpInside)
+    }
+    
     func setupView() {
+        
+        imageDataManagement.addImage(imageData.getImageModels())
         
         view.backgroundColor = .white
         
         setupImageView()
         setupInfoLabel()
         
-        view.addSubview(stackView)
+        view.addSubview(verticalstackView)
         view.addSubview(firstButton)
+        addAction()
         
         setupVerticalStackView()
         setupHorizontalStackView()
@@ -67,26 +94,28 @@ private extension ViewController {
     }
     
     func setupImageView() {
-        
-        imageView.image = UIImage(named: "1")
+        let imageName = imageDataManagement.getNextImage().imageName
+        imageView.image = UIImage(named: imageName)
         imageView.contentMode = .scaleAspectFit
         
     }
     
     func setupInfoLabel() {
-        infoLabel.text = "Hello, World!"
+        let imageInfo = imageDataManagement.getNextImage().imageText
+        infoLabel.text = imageInfo
         infoLabel.textColor = .black
-        infoLabel.font = .systemFont(ofSize: 20)
+        infoLabel.font = .systemFont(ofSize: 15)
+        infoLabel.numberOfLines = 0
     }
     
     func setupVerticalStackView() {
-        stackView.axis = .vertical
-        stackView.distribution = .fillEqually
-        stackView.alignment = .center
-        stackView.spacing = 10
+        verticalstackView.axis = .vertical
+        verticalstackView.distribution = .fillEqually
+        verticalstackView.alignment = .center
+        verticalstackView.spacing = 10
         
-        stackView.addArrangedSubview(imageView)
-        stackView.addArrangedSubview(infoLabel)
+        verticalstackView.addArrangedSubview(imageView)
+        verticalstackView.addArrangedSubview(infoLabel)
         
     }
     
@@ -108,18 +137,18 @@ private extension ViewController {
 private extension ViewController {
     
     func setupLayout() {
-        stackView.translatesAutoresizingMaskIntoConstraints = false
+        verticalstackView.translatesAutoresizingMaskIntoConstraints = false
         horizontalStackView.translatesAutoresizingMaskIntoConstraints = false
         firstButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             
-            stackView.topAnchor.constraint(equalTo: view.topAnchor, constant: 150),
-            stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            stackView.widthAnchor.constraint(equalToConstant: 200),
-            stackView.heightAnchor.constraint(equalToConstant: 200),
+            verticalstackView.topAnchor.constraint(equalTo: view.topAnchor, constant: 150),
+            verticalstackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            verticalstackView.widthAnchor.constraint(equalToConstant: 200),
+            verticalstackView.heightAnchor.constraint(equalToConstant: 200),
             
-            horizontalStackView.bottomAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 50),
+            horizontalStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             horizontalStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
             firstButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),

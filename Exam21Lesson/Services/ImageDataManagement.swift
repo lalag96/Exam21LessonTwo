@@ -16,6 +16,10 @@ class ImageDataManagement {
         self.images = images
     }
     
+    func addImage(_ images: [ImageInfo]) {
+        self.images.append(contentsOf: images)
+    }
+    
     func getNextImage() -> ImageInfo {
         images[currentIndex]
     }
@@ -24,6 +28,18 @@ class ImageDataManagement {
         if currentIndex < images.count - 1 {
             currentIndex += 1
         }
+        return getNextImage()
+    }
+    
+    func getLastImageIndex() -> ImageInfo {
+        if currentIndex < images.count && currentIndex != 0 {
+            currentIndex -= 1
+        }
+        return getNextImage()
+    }
+    
+    func getFirstButtonIndex() -> ImageInfo {
+        currentIndex = 0
         return getNextImage()
     }
 }
