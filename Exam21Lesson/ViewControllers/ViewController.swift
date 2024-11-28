@@ -94,14 +94,14 @@ private extension ViewController {
     }
     
     func setupImageView() {
-        let imageName = imageDataManagement.getNextImage().imageName
+        let imageName = imageDataManagement.сurrentElement().imageName
         imageView.image = UIImage(named: imageName)
         imageView.contentMode = .scaleAspectFit
         
     }
     
     func setupInfoLabel() {
-        let imageInfo = imageDataManagement.getNextImage().imageText
+        let imageInfo = imageDataManagement.сurrentElement().imageText
         infoLabel.text = imageInfo
         infoLabel.textColor = .black
         infoLabel.font = .systemFont(ofSize: 15)
