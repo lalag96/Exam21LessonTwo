@@ -7,7 +7,17 @@
 
 import Foundation
 
-class ImageDataManagement {
+protocol ImageManaging {
+    
+    func addImage(_ images: [ImageInfo])
+    func сurrentElement() -> ImageInfo
+    func getNextImageIndex() -> ImageInfo
+    func getLastImageIndex() -> ImageInfo
+    func getFirstButtonIndex() -> ImageInfo
+}
+
+
+class ImageDataManagement: ImageManaging {
     
     private var images: [ImageInfo] = []
     private var currentIndex = 0

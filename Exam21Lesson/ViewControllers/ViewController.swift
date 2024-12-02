@@ -9,8 +9,12 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    private let imageDataManagement = ImageDataManagement(images: [])
-    private let imageData = ImageManager()
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private let dataManager: ImageManaging
+    private let imageDataManagement: ImageProviding
     
     private let imageView = UIImageView()
     private let infoLabel = UILabel()

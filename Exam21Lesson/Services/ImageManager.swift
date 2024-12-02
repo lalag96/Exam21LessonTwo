@@ -7,7 +7,12 @@
 
 import Foundation
 
-class ImageManager {
+protocol ImageProviding {
+    
+    func getImageModels() -> [ImageInfo]
+}
+
+class ImageManager: ImageProviding {
     
     func getImageModels() -> [ImageInfo] {
         [

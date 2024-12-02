@@ -13,12 +13,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-       
+
         guard let windowScene = scene as? UIWindowScene else { return }
+        
+        let imageProvider = ImageManager()
+        let dataManager = ImageDataManagement(images: [])
+        
+        dataManager.addImage(imageProvider.getImageModels())
+        
+        let viewController = ViewController(dataManager: dataManager, imageProvider: imageProvider)
         let window = UIWindow(windowScene: windowScene)
-        window.rootViewController = ViewController()
-        window.makeKeyAndVisible()
+        window.rootViewController = viewController
         self.window = window
+        window.makeKeyAndVisible()
        
     }
 
