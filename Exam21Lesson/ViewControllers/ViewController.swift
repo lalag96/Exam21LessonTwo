@@ -9,8 +9,7 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    private let imageData = ImageManager()
-    private let imageDataManagement = ImageDataManagement(images: [])
+    var imageDataManagement: ImageManaging!
     
     private let imageView = UIImageView()
     private let infoLabel = UILabel()
@@ -54,20 +53,17 @@ private extension ViewController {
     func addAction() {
         let nextdButtonAction = UIAction { _ in
             let nextImageInfo = self.imageDataManagement.getNextImageIndex()
-            self.imageView.image = UIImage(named: nextImageInfo.imageName)
-            self.infoLabel.text = nextImageInfo.imageText
+            self.action(imageInfo: nextImageInfo)
         }
         
         let firstButtonAction = UIAction { _ in
             let firstImageInfo = self.imageDataManagement.getFirstButtonIndex()
-            self.imageView.image = UIImage(named: firstImageInfo.imageName)
-            self.infoLabel.text = firstImageInfo.imageText
+            self.action(imageInfo: firstImageInfo)
         }
         
         let lastButtonAction = UIAction { _ in
             let lastImageInfo = self.imageDataManagement.getLastImageIndex()
-            self.imageView.image = UIImage(named: lastImageInfo.imageName)
-            self.infoLabel.text = lastImageInfo.imageText
+            self.action(imageInfo: lastImageInfo)
         }
         
         nextdButton.addAction(nextdButtonAction, for: .touchUpInside)
@@ -75,9 +71,12 @@ private extension ViewController {
         firstButton.addAction(firstButtonAction, for: .touchUpInside)
     }
     
+    private func action(imageInfo: ImageInfo) {
+        imageView.image = UIImage(named: imageInfo.imageName)
+        infoLabel.text = imageInfo.imageText
+    }
+    
     func setupView() {
-        
-        imageDataManagement.addImage(imageData.getImageModels())
         
         view.backgroundColor = .white
         

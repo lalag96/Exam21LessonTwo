@@ -23,6 +23,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         imageDataManagement.addImage(imageProviding.getImageModels())
         
         let viewController = ViewController()
+        viewController.imageDataManagement = imageDataManagement
         
         
         window.rootViewController = viewController
