@@ -7,8 +7,18 @@
 
 import Foundation
 
-struct ImageInfo {
+struct ImageInfo: Comparable, CustomStringConvertible {
+    
+    
     
     let imageName: String
     let imageText: String
+    
+    static func < (lhs: ImageInfo, rhs: ImageInfo) -> Bool {
+        lhs.imageName < rhs.imageName
+    }
+    
+    var description: String {
+        "Название картинки: \(imageName), описание: \(imageText)"
+    }
 }

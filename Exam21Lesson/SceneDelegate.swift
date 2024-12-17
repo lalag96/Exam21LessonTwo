@@ -19,8 +19,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let imageProviding = ImageManager()
         let imageDataManagement = ImageDataManagement(images: [])
+        let imgaeSorted = imageProviding.getImageModels().sorted(by: <)
         
-        imageDataManagement.addImage(imageProviding.getImageModels())
+        printImage(imgaeSorted)
+        
+        imageDataManagement.addImage(imgaeSorted)
         
         let viewController = ViewController()
         viewController.imageDataManagement = imageDataManagement
@@ -30,6 +33,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window.makeKeyAndVisible()
         self.window = window
        
+    }
+    
+    private func printImage(_ images:[ImageInfo]) {
+        for image in images {
+            print(image.description)
+        }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
